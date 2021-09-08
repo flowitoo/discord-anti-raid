@@ -40,17 +40,6 @@ async def update_invites():
         for invite in invites:
             invite_uses_before[guild.id].append(invite)
 
-@bot.command()
-async def update(ctx):
-    invite_uses_before[ctx.guild.id] = []
-    invite_uses_before[ctx.guild.id] = list()
-    guild = bot.get_guild(ctx.guild.id)
-    invites = await guild.invites()
-    invite_uses_before[guild.id].clear()
-    for invite in invites:
-        invite_uses_before[guild.id].append(invite)
-    await ctx.channel.send("invites updated!")
-
 @bot.event
 async def on_invite_create(invite):
     counter[invite.code] = []
