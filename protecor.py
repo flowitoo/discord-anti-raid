@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import Intents
+from discord import Intents, Activity
 import asyncio
 from collections import defaultdict
 
@@ -18,13 +18,16 @@ global counter
 counter = {}
 
 @bot.event
-async def on_ready(): 
-    await restart()
+async def on_ready():
+    await bot.change_presence(activity=Activity(name=f"protecting {len(bot.guilds)} server(s) with {len(bot.users)} user(s)", type=5))
     print("im ready")
-    task = asyncio.create_task(await update_every_5s())
-    task = asyncio.create_task(await restart_every_10_s())
 
+    loop = asyncio.get_event_loop()
+    loop.create_task(restart_every_10_s())
+    loop.create_task(update_every_5s())
+    
 async def restart():
+    print("restarted!")
     for guild in bot.guilds:
         invites = await guild.invites()
         for invite in invites:
@@ -33,6 +36,7 @@ async def restart():
             counter[invite.code].clear()
 
 async def update_invites():
+    print("updated!")
     for guild in bot.guilds:
         invite_uses_before[guild.id] = []
         invite_uses_before[guild.id] = list()
@@ -90,4 +94,4 @@ async def update_every_5s():
         await asyncio.sleep(5)
         await update_invites()
 
-bot.run("ENTER YOUR TOKEN HERE")
+bot.run("ENTER BOT TOKEN")
