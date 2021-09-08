@@ -1,6 +1,7 @@
 # discord-anti-raid
-[![Last Commit](https://img.shields.io/github/last-commit/flowitoo/token-checker?color=9b59b6&logo=Elixir&logoColor=9b59b6&style=for-the-badge)](https://github.com/flowitoo/token-checker)
-[![Repo visits](https://badges.pufler.dev/visits/flowitoo/token-checker?style=for-the-badge&logo=elixir&logoColor=9b59b6&color=9b59b6&label=repo+visits)](https://github.com/flowitoo/token-checker)
+[![Last Commit](https://img.shields.io/github/last-commit/flowitoo/discord-anti-raid?color=9b59b6&logo=Elixir&logoColor=9b59b6&style=for-the-badge)](https://github.com/flowitoo/discord-anti-raid)
+[![Repo visits](https://badges.pufler.dev/visits/flowitoo/discord-anti-raid?style=for-the-badge&logo=elixir&logoColor=9b59b6&color=9b59b6&label=repo+visits)](https://github.com/flowitoo/discord-anti-raid)
+
 This simple bot will protect your server from token raids, delete all messages (if tokens manage to spam something) and soft ban them (ban them and unban them).
 
 ## How it works?
