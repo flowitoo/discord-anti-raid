@@ -23,8 +23,6 @@ invite_uses_after = list()
 
 async def update_invites():
     for guild in bot.guilds:
-        invite_uses_before = []
-        invite_uses_before = list()
         invites = await guild.invites()
         invite_uses_before.clear()
         for invite in invites:
@@ -33,8 +31,6 @@ async def update_invites():
 @bot.event()
 async def on_member_join(member):
     guild = bot.get_guild(member.guild.id)
-    invite_uses_after = []
-    invite_uses_after = list()
     invite_uses_after.clear()
     invites = await guild.invites()
 
