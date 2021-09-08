@@ -6,7 +6,7 @@ This simple bot will protect your server from token raids, delete all messages (
 
 ## How it works?
 
-The bot works by tracking the invite code and how many users will enter within 10 seconds, and if more than 5 users enter within 10 seconds the bot will soft ban them (ban pa unban) and delete all their messages and thus prevent tokens to spam on your server.
+The bot works by tracking the invite code and how many users will enter within 10 seconds, and if more than 5 users enter within 10 seconds the bot will soft ban them (ban them and unban them) and delete all their messages and thus prevent tokens to spam on your server.
 
 ## How does the bot know through which invite code who entered?
 The bot compares all the invite codes and checks which invite code has more uses after someone has joined the server and in that way you can extract Invite uses, Invite code, Inviter, and everything else related to invite...
