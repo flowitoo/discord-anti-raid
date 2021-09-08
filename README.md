@@ -43,7 +43,7 @@ async def on_member_join(member):
 
     for i, invite in enumerate(invite_uses_after):
         if int(invite_uses_before[i].uses) != int(invite.uses):
-            print(f"{member.name} was invited by {invite.inviter}, code is {invite.code} (used {invite.uses} times)")
+            print(f"User {member.name} was invited by {invite.inviter}, invite code is {invite.code}, invite code was used {invite.uses} times")
 ...
 ```
 
