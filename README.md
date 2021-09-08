@@ -21,7 +21,6 @@ global invite_uses_after
 invite_uses_after = []
 invite_uses_after = list()
 
-
 async def update_invites():
     for guild in bot.guilds:
         invite_uses_before = []
@@ -47,7 +46,8 @@ async def on_member_join(member):
             print(f"User {member.name} was invited by {invite.inviter}, with invite code {invite.code}, invite was used {invite.uses} times")
 ...
 ```
-As you can see in update_invites we append invite codes to the invite_uses_before, and then we just wait for the user to join so the code below runs below on_member_join event execute. When the user joins, we append the invite codes to invite_uses_after and compare the invite uses of each invite code from invite_uses_before with the invite uses from invite_uses_after, and extract the invite code that has one use more.
+
+As you can see in **update_invites** we append invite codes to the **invite_uses_before**, and then we just wait for the user to join so the code below runs below **on_member_join** event execute. When the user joins, we append the invite codes to **invite_uses_after** and compare the invite uses of each invite code from **invite_uses_before** with the invite uses from **invite_uses_after**, and extract the invite code that has one use more.
 
 ## EXTRA
 The bot supports multi-guild functionality, which means it can run on multiple servers, with individual options for each server.
