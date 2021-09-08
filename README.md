@@ -14,7 +14,6 @@ The bot compares all the invite codes and checks which invite code has more uses
 ```python
 ...
 for i, invite in enumerate(invite_uses_after[guild.id]):
-    counter[invite.code].append(member.id)
     if int(invite_uses_before[guild.id][i].uses) != int(invite.uses):
 ...
 ```
