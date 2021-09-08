@@ -27,7 +27,6 @@ async def on_ready():
     loop.create_task(update_every_5s())
     
 async def restart():
-    print("restarted!")
     for guild in bot.guilds:
         invites = await guild.invites()
         for invite in invites:
@@ -36,7 +35,6 @@ async def restart():
             counter[invite.code].clear()
 
 async def update_invites():
-    print("updated!")
     for guild in bot.guilds:
         invite_uses_before[guild.id] = []
         invite_uses_before[guild.id] = list()
