@@ -13,10 +13,41 @@ The bot compares all the invite codes and checks which invite code has more uses
 
 ```python
 ...
-for i, invite in enumerate(invite_uses_after[guild.id]):
-    if int(invite_uses_before[guild.id][i].uses) != int(invite.uses):
+global invite_uses_before
+invite_uses_before = []
+invite_uses_before = list()
+
+global invite_uses_after
+invite_uses_after = []
+invite_uses_after = list()
+
+
+async def update_invites():
+    for guild in bot.guilds:
+        invite_uses_before = []
+        invite_uses_before = list()
+        invites = await guild.invites()
+        invite_uses_before.clear()
+        for invite in invites:
+            invite_uses_before.append(invite)
+
+@bot.event()
+async def on_member_join(member):
+    guild = bot.get_guild(member.guild.id)
+    invite_uses_after = []
+    invite_uses_after = list()
+    invite_uses_after.clear()
+    invites = await guild.invites()
+
+    for invite in invites:
+        invite_uses_after.append(invite)
+
+    for i, invite in enumerate(invite_uses_after):
+        if int(invite_uses_before[i].uses) != int(invite.uses):
+            print(f"User {member.name} was invited by {invite.inviter}, with invite code {invite.code}, invite was used {invite.uses} times")
 ...
 ```
+As you can see in update_invites we append invite codes to the invite_uses_before, and then we just wait for the user to join so the code below runs below on_member_join event execute. When the user joins, we append the invite codes to invite_uses_after and compare the invite uses of each invite code from invite_uses_before with the invite uses from invite_uses_after, and extract the invite code that has one use more.
 
 ## EXTRA
 The bot supports multi-guild functionality, which means it can run on multiple servers, with individual options for each server.
