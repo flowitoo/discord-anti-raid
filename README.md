@@ -18,3 +18,6 @@ for i, invite in enumerate(invite_uses_after[guild.id]):
     if int(invite_uses_before[guild.id][i].uses) != int(invite.uses):
 ...
 ```
+
+## EXTRA
+The bot supports multi-guild functionality, which means it can run on multiple servers, with individual options for each server.
