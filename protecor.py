@@ -6,6 +6,7 @@ from collections import defaultdict
 intents=intents=Intents.all()
 
 bot = commands.Bot(command_prefix="+", intents=intents)
+bot.remove_command("help")
 
 global invite_uses_before
 invite_uses_before = defaultdict(dict)
