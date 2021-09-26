@@ -104,4 +104,4 @@ async def update_every_5s():
         await asyncio.sleep(5)
         await update_invites()
 
-bot.run("ODkxMjM4MTAyMjA5ODEwNDMz.YU7cKQ.hCv-3PMe_EBOkzeKCDJMbZXNHB0")
+bot.run("TOKEN")
