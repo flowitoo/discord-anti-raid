@@ -1,12 +1,13 @@
-from discord.ext import commands
+import discord
+import time
 from discord import Intents, Activity
 import asyncio
 from collections import defaultdict
+import threading
 
 intents=intents=Intents.all()
 
-bot = commands.Bot(command_prefix="+", intents=intents)
-bot.remove_command("help")
+bot = discord.Client(intents=intents)
 
 global invite_uses_before
 invite_uses_before = defaultdict(dict)
@@ -17,22 +18,20 @@ invite_uses_after = defaultdict(dict)
 global counter
 counter = {}
 
+global countdown_task
+countdown_task = {}
+
+global spam
+spam = {}
+
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=Activity(name=f"protecting {len(bot.guilds)} server(s) with {len(bot.users)} user(s)", type=5))
     print("im ready")
 
     loop = asyncio.get_event_loop()
-    loop.create_task(restart_every_10_s())
     loop.create_task(update_every_5s())
-    
-async def restart():
-    for guild in bot.guilds:
-        invites = await guild.invites()
-        for invite in invites:
-            counter[invite.code] = []
-            counter[invite.code] = list()
-            counter[invite.code].clear()
+
 
 async def update_invites():
     for guild in bot.guilds:
@@ -68,6 +67,15 @@ async def on_member_join(member):
         invite_uses_after[guild.id].append(invite)
 
     for i, invite in enumerate(invite_uses_after[guild.id]):
+        countdown_task[invite.code] = asyncio.create_task(checkit())
+        try:
+            if countdown_task[invite.code] in asyncio.all_tasks():
+                pass
+                
+            else:
+                countdown_task[invite.code].start()
+        except:
+            countdown_task[invite.code].start()
         counter[invite.code].append(member.id)
         if int(invite_uses_before[guild.id][i].uses) != int(invite.uses):
             if len(counter[invite.code]) >= 5:
@@ -82,14 +90,18 @@ async def on_member_join(member):
     for invite in invite_uses_after[guild.id]:
         invite_uses_before[guild.id].append(invite)
 
-async def restart_every_10_s():
-    while True:
-        await asyncio.sleep(10)
-        await restart()
+async def checkit():
+    time.sleep(10)
+    for guild in bot.guilds:
+        invites = await guild.invites()
+        for invite in invites:
+            counter[invite.code] = []
+            counter[invite.code] = list()
+            counter[invite.code].clear()
 
 async def update_every_5s():
     while True:
         await asyncio.sleep(5)
         await update_invites()
 
-bot.run("ENTER BOT TOKEN")
+bot.run("ODkxMjM4MTAyMjA5ODEwNDMz.YU7cKQ.hCv-3PMe_EBOkzeKCDJMbZXNHB0")
